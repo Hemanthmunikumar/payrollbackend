@@ -1,0 +1,11 @@
+{
+  "name": "payrollbackend",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "body-parser": "^1.18.1",
+    "express": "^4.15.4",
+    "morgan": "^1.8.2",
+    "mysql": "^2.14.1"
+  }
+}
