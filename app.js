@@ -3,6 +3,7 @@
 var express = require('express'),
         bodyparser = require('body-parser'),
         morgan = require('morgan'),
+        cors = require('cors'),
         port = 3000,
         app = express(),
         dbConnection = '';
@@ -10,6 +11,7 @@ var express = require('express'),
 
 app.use(bodyparser.json());
 app.use(morgan('dev'));
+app.use(cors());
 //gives the static pages access
 app.use(express.static(__dirname + '/public'));
 //requiring the routes
