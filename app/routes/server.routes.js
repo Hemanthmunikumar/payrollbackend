@@ -8,6 +8,8 @@ module.exports = function (app) {
     //employee
     app.get('/employees', employapiController.fetchEmployDataAPI);
     app.post('/addemployee', employapiController.InsertEmployDataAPI);
+    app.get('/employeedetails', employapiController.fetchEmployeedatailsDataAPI);
+    app.post('/loginemployee', employapiController.loginEmployDataAPI);
     
     //departments
     app.get('/departments', commonapiController.fetchdepartmentsDataAPI);

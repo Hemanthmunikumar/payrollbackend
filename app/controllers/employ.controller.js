@@ -1,5 +1,4 @@
-var tableModel = require('../models/server.model.js'),
-connection = require('../../config/env/env.js');
+var connection = require('../../config/env/env.js');
 connection = require('../services/server.service.js').connection;
 
 exports.fetchEmployDataAPI = function (req, res) {
@@ -14,10 +13,9 @@ if (err) {
 });
 };
 exports.InsertEmployDataAPI = function (req, res) {  
-    if(req.body.aboutUs==undefined){req.body.aboutUs='';}  
+    if(req.body.aboutUs==undefined){req.body.aboutUs='';}     
     
-    var name = req.body.name, price = req.body.price, imageUrl = req.body.imageUrl;
-    var query = 'INSERT INTO employee(`Name`,`FatherName`,`MobileNo`, `Email`, ' +
+    var query = 'INSERT INTO employee(`Name`,`FatherName`,`mobileNo`, `Email`, ' +
                  '`Department`,`Address`,`DateofBirth`,`DateofJoin`, `DateofReleave`, ' +
                  '`Experience`,`Designation`,`IDProofs`,`AboutUs`, `isActive`) ' +
                 // ' `isDeleted`,`createdDate`,`createdBy`,`editedDate`,`editedBy`) '+
@@ -41,3 +39,33 @@ exports.InsertEmployDataAPI = function (req, res) {
     }
     });
     };
+
+    exports.loginEmployDataAPI = function (req, res) {  
+        if(req.body.password==undefined){req.body.password='';}         
+        
+        var query ='select * from employee where password="'+req.body.password +'" and (name="'+req.body.name
+                    +'" or mobileNo="'+req.body.name+'")';
+    
+        connection.query(query, function (err, data) {
+        if (err) {
+            console.log(err, 'Error while login employee.');
+            res.send(err);
+        } else {
+        console.log(data);
+            res.send(data);
+        }
+        });
+        };
+
+
+        exports.fetchEmployeedatailsDataAPI = function (req, res) {  
+            var query ='select * from employee where empId="'+req.body.empId +'" ';        
+            connection.query(query, function (err, data) {
+            if (err) {
+                console.log(err, 'Error while employee details.');
+                res.send(err);
+            } else {
+                res.send(data);
+            }
+            });
+            };
