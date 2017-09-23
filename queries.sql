@@ -4,32 +4,32 @@ use payroll;
 
 CREATE TABLE employee_seq
 (
-  EmpId INT NOT NULL AUTO_INCREMENT PRIMARY KEY
+  empId INT NOT NULL AUTO_INCREMENT PRIMARY KEY
 );
 CREATE TABLE employee
 (
-  Id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  EmpId VARCHAR(7) NOT NULL DEFAULT '0',
-  Name VARCHAR(50),
-  Password VARCHAR(50),
-  FatherName VARCHAR(50),
-  MobileNo VARCHAR(50),
-  Email VARCHAR(70),
-  Department INT,
-  Address VARCHAR(255),
-  DateofBirth DATETIME ,
-  DateofJoin DATETIME DEFAULT CURRENT_TIMESTAMP,
-  DateofReleave DATETIME,
-  Experience VARCHAR(50),
-  Designation INT,
-  IDProofs VARCHAR(255),
-  AboutUs VARCHAR(255),
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  empId VARCHAR(7) NOT NULL DEFAULT '0',
+  name VARCHAR(50),
+  password VARCHAR(50),
+  fatherName VARCHAR(50),
+  mobileNo VARCHAR(50),
+  email VARCHAR(70),
+  department INT,
+  address VARCHAR(255),
+  dateofBirth DATETIME ,
+  dateofJoin DATETIME DEFAULT CURRENT_TIMESTAMP,
+  dateofReleave DATETIME,
+  experience VARCHAR(50),
+  designation INT,
+  idProofs VARCHAR(255),
+  aboutUs VARCHAR(255),
   isActive boolean DEFAULT false,
   isDeleted  boolean DEFAULT false,
-  CreatedDate DATETIME DEFAULT CURRENT_TIMESTAMP,
-  CretedBy VARCHAR(50) ,
-  ModifiedDate DATETIME ON UPDATE CURRENT_TIMESTAMP ,
-  ModifiedBy VARCHAR(50)
+  createdDate DATETIME DEFAULT CURRENT_TIMESTAMP,
+  cretedBy VARCHAR(50) ,
+  modifiedDate DATETIME ON UPDATE CURRENT_TIMESTAMP ,
+  modifiedBy VARCHAR(50)
 );
 
 DELIMITER $$
@@ -38,13 +38,46 @@ BEFORE INSERT ON employee
 FOR EACH ROW
 BEGIN
   INSERT INTO employee_seq VALUES (NULL);
-  SET NEW.EmpId = CONCAT('EMP', LPAD(LAST_INSERT_ID(), 4, '0'));
+  SET NEW.empId = CONCAT('EMP', LPAD(LAST_INSERT_ID(), 4, '0'));
 END$$
 DELIMITER ;
 
-/*INSERT INTO employee (name,MobileNo,Password) 
+/*INSERT INTO employee (name,mobileNo,password) 
 VALUES ('Admin','9999999999','123');
 
 UPDATE employee SET password='123' where id=1
 drop table employee
 select * from employee */
+
+
+CREATE TABLE departments
+(
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,  
+  name VARCHAR(50),
+  isActive boolean DEFAULT true,  
+  createdDate DATETIME DEFAULT CURRENT_TIMESTAMP,
+  cretedBy VARCHAR(50) ,
+  modifiedDate DATETIME ON UPDATE CURRENT_TIMESTAMP ,
+  modifiedBy VARCHAR(50)
+);
+CREATE TABLE designation
+(
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,  
+  name VARCHAR(50),
+  isActive boolean DEFAULT true,  
+  createdDate DATETIME DEFAULT CURRENT_TIMESTAMP,
+  cretedBy VARCHAR(50) ,
+  modifiedDate DATETIME ON UPDATE CURRENT_TIMESTAMP ,
+  modifiedBy VARCHAR(50)
+);
+/*INSERT INTO designation (name) 
+VALUES ('Sales Executive');
+drop table designation
+select * from designation */
+
+/*INSERT INTO departments (name) 
+VALUES ('Sales');
+drop table designation
+select * from designation */
+
+

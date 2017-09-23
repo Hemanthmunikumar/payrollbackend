@@ -6,23 +6,25 @@ exports.fetchEmployDataAPI = function (req, res) {
 var query1 = "select * from employee";
 connection.query(query1, function (err, data) {
 if (err) {
-    console.log(err, 'Error in creating table');
+    console.log(err, 'Error while getting employee');
     res.send(err);
 } else {
     res.send(data);
 }
 });
 };
-exports.InsertEmployDataAPI = function (req, res) {    
+exports.InsertEmployDataAPI = function (req, res) {  
+    if(req.body.aboutUs==undefined){req.body.aboutUs='';}  
+    
     var name = req.body.name, price = req.body.price, imageUrl = req.body.imageUrl;
-    var query = 'INSERT INTO employee(`Name`,`Password`,`FatherName`,`MobileNo`, `Email`, ' +
+    var query = 'INSERT INTO employee(`Name`,`FatherName`,`MobileNo`, `Email`, ' +
                  '`Department`,`Address`,`DateofBirth`,`DateofJoin`, `DateofReleave`, ' +
-                 '`Experience`,`Designation`,`IDProofs`,`AboutUs`, `isActive`, ' +
+                 '`Experience`,`Designation`,`IDProofs`,`AboutUs`, `isActive`) ' +
                 // ' `isDeleted`,`createdDate`,`createdBy`,`editedDate`,`editedBy`) '+
-                 ' VALUES ( '+req.body.name+','+req.body.password+','+req.body.fatherName+','+req.body.mobileNo+
-                 ','+req.body.email+','+req.body.department+','+req.body.address+','+req.body.dateofBirth+
-                 ','+req.body.dateofJoin+','+req.body.dateofReleave+','+req.body.experience+','+req.body.designation+
-                 ','+req.body.idProofs+','+req.body.aboutUs+','+req.body.isActive+
+                 ' VALUES ( "'+req.body.name+'","'+req.body.fatherName+'","'+req.body.mobileNo+
+                 '","'+req.body.email+'","'+req.body.department+'","'+req.body.address+'","'+new Date(req.body.dateofBirth).toISOString().replace(/T/, ' ').replace(/\..+/, '')+
+                 '","'+new Date(req.body.dateofJoin).toISOString().replace(/T/, ' ').replace(/\..+/, '')+'","'+new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')+'","'+req.body.experience+'","'+req.body.designation+
+                 '","'+req.body.idProofs+'","'+req.body.aboutUs+'",'+req.body.isActive+
                 // ','+req.body.isDeleted+ ','+req.body.password+','+req.body.password+','+req.body.password+','+req.body.password+
                  
                  
@@ -32,7 +34,7 @@ exports.InsertEmployDataAPI = function (req, res) {
 
     connection.query(query, function (err, data) {
     if (err) {
-        console.log(err, 'Error in creating table');
+        console.log(err, 'Error while insert employee.');
         res.send(err);
     } else {
         res.send(data);
