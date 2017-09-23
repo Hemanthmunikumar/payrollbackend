@@ -5,7 +5,7 @@ module.exports = {
         "db": "payroll",
         "url": "localhost",
         "username": "root",
-        "password": "prime"
+        "password": "1707113"
     }
 }
 

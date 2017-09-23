@@ -1,4 +1,5 @@
 /*create database payroll*/
+
 use payroll;
 
 CREATE TABLE employee_seq
@@ -23,7 +24,8 @@ CREATE TABLE employee
   Designation INT,
   IDProofs VARCHAR(255),
   AboutUs VARCHAR(255),
-  isActive bit DEFAULT 0,
+  isActive boolean DEFAULT false,
+  isDeleted  boolean DEFAULT false,
   CreatedDate DATETIME DEFAULT CURRENT_TIMESTAMP,
   CretedBy VARCHAR(50) ,
   ModifiedDate DATETIME ON UPDATE CURRENT_TIMESTAMP ,
