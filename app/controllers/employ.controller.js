@@ -59,7 +59,10 @@ exports.InsertEmployDataAPI = function (req, res) {
 
 
         exports.fetchEmployeedatailsDataAPI = function (req, res) {  
-            var query ='select * from employee where empId="'+req.body.empId +'" ';        
+            console.log(req.body);
+            console.log(req.query.empId);
+            var query ='select * from employee where empId="'+req.query.empId+'" ';        
+            //var query ='select * from employee';        
             connection.query(query, function (err, data) {
             if (err) {
                 console.log(err, 'Error while employee details.');

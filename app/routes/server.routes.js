@@ -8,7 +8,7 @@ module.exports = function (app) {
     //employee
     app.get('/employees', employapiController.fetchEmployDataAPI);
     app.post('/addemployee', employapiController.InsertEmployDataAPI);
-    app.get('/employeedetails', employapiController.fetchEmployeedatailsDataAPI);
+    app.get('/employeedetails/:empid', employapiController.fetchEmployeedatailsDataAPI);
     app.post('/loginemployee', employapiController.loginEmployDataAPI);
     
     //departments

@@ -2,13 +2,14 @@
 
 var express = require('express'),
         bodyparser = require('body-parser'),
+        querystring = require('querystring'),
         morgan = require('morgan'),
         cors = require('cors'),
         port = 3000,
         app = express(),
         dbConnection = '';
 
-
+//app.use(bodyParser.urlencoded({ extended: false })); 
 app.use(bodyparser.json());
 app.use(morgan('dev'));
 app.use(cors());
