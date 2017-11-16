@@ -1,16 +1,22 @@
 var connection = require('../../config/env/env.js');
 connection = require('../services/server.service.js').connection;
-
+var jwt = require('jsonwebtoken');
 exports.fetchEmployDataAPI = function (req, res) {
-    var query1 = "select * from employee";
-    connection.query(query1, function (err, data) {
-        if (err) {
-            console.log(err, 'Error while getting employee');
-            res.send(err);
-        } else {
-            res.send(data);
-        }
-    });
+    if (req.user) {
+        var query1 = "select * from employee";
+        connection.query(query1, function (err, data) {
+            if (err) {
+                console.log(err, 'Error while getting employee');
+                res.send(err);
+            } else {
+                res.send(data);
+            }
+        });
+    }
+    else {
+        res.status = 404;
+        res.send({ message: "Unauthrized user. please login...." });
+    }
 };
 exports.InsertEmployDataAPI = function (req, res) {
     if (req.body.aboutUs == undefined) { req.body.aboutUs = ''; }
@@ -59,7 +65,9 @@ exports.loginEmployDataAPI = function (req, res) {
             }
             else{
                 response.status = true;
-                response.data = data[0];
+                                // res.json({token: jwt.sign({ email: user.email, fullName: user.fullName, _id: user._id}, 'RESTFULAPIs')});
+                response.data = {token: jwt.sign({ email: data[0].email, fullName: data[0].name, _id: data[0].id}, 'RESTFULAPIs')};
+                
             }
             
             debugger;

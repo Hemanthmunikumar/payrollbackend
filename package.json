@@ -2,10 +2,20 @@
   "name": "payrollbackend",
   "version": "0.0.1",
   "private": true,
+  "description": "Payroll",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test":"node --inspect app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.1",
     "cors": "^2.8.4",
     "express": "^4.15.4",
+    "jsonwebtoken": "^8.1.0",
     "morgan": "^1.8.2",
     "mysql": "^2.14.1",
     "querystring": "^0.2.0"

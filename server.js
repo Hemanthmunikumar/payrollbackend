@@ -2,8 +2,8 @@
 var http     = require('http'),
 	express  = require('express'),
 	mysql    = require('mysql')
-	parser   = require('body-parser');
- 
+	parser   = require('body-parser'),
+	jsonwebtoken = require("jsonwebtoken");
 // Database Connection
 var connection = mysql.createConnection({
   host     : 'localhost',
@@ -21,8 +21,8 @@ try {
  
 // Setup express
 var app = express();
-app.use(parser.json());
 app.use(parser.urlencoded({ extended: true }));
+app.use(parser.json());
 app.set('port', process.env.PORT || 5000);
  
 // Set default route
